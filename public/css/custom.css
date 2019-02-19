@@ -1,0 +1,98 @@
+.search{
+
+	min-height:70px;
+	margin-top: 15px;
+	padding: 10px;
+	font-size: 20px;
+	font-weight: 700;
+}
+
+ .search option{
+	font-size: 20px;
+	font-weight: 700;
+}
+
+.search-btn{
+	color: white;
+	padding:10px 30px;
+	margin-top: 25px;
+	font-size: 22px;
+	font-weight: 700;
+	border-radius: 10px;
+}
+
+.home-heading{
+	color:white;
+	font-size: 34px;
+	margin-top: 50px;
+    line-height: 50px;
+	font-weight: 700;
+	margin-bottom: 50px;
+}
+
+.home-background{
+	height: 500px;
+	background-position: center;
+	background-size: cover;
+	padding:25px;
+	padding-left: 150px;
+	padding-right: 150px;
+}
+
+.search_bar{
+	min-height: 200px;
+	background-position: center;
+	background-size: cover;
+	padding:25px;
+	border-radius: 10px;
+}
+
+.searchBar{
+	margin-top: 50px;
+	margin-bottom: 50px;
+	min-height: 50px;
+}
+
+.box_container{
+	margin-top:20px;
+}
+
+.image_style{
+	height: 250px;
+	width: 100%;
+}
+
+.image_div{
+	min-height: 200px;
+	background-position: center;
+	background-size: cover;
+	padding: 25px;
+}
+
+.tab_content{
+	min-width: 200px;
+
+
+}
+
+.div_details{
+
+	min-height: 200px;
+	background-position: center;
+	background-size: cover;
+
+
+}
+
+.text_hedding{
+
+	font-size: 20px;
+
+
+}
+
+.ug-theme-slider{
+	width: 100% !important;
+	max-width: 100% !important;
+	max-height: 300px !important;
+}
