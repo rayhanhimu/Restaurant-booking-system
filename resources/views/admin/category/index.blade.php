@@ -52,7 +52,7 @@
 	                	</div>
 		            </div>
 		            <div class="modal-footer">
-		                <button data-bb-handler="success" type="button" class="btn btn-purple">Save</button>
+		                <button data-bb-handler="success" type="submit" class="btn btn-purple">Save</button>
 		            </div>
 				</form>
 	        </div>

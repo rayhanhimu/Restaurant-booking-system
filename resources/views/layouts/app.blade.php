@@ -36,9 +36,9 @@
 </head>
 <body>
     <div id="container" class="effect aside-float aside-bright mainnav-lg">
-        
+
         @include('inc.admin_nav')
-        
+
 
         <div class="boxed">
 
@@ -58,7 +58,7 @@
         @elseif(Auth::user()->user_type == "Admin")
             @include('inc.admin_sidenav')
         @endif
-        
+
         @include('inc.admin_footer')
 
         @include('partials.modal')
@@ -87,7 +87,7 @@
 
 
         <!--Form Wizard [ SAMPLE ]-->
-        <script src="{{ asset('js/demo/form-wizard.js')}}"></script>
+        {{-- <script src="{{ asset('js/demo/form-wizard.js')}}"></script> --}}
 
 
         <script type="text/javascript">
@@ -99,7 +99,7 @@
                     urlRegExp = new RegExp(url.replace(/\/$/,''));
                     if(urlRegExp.test(this.href)){
                         $(this).parent().addClass('active-link');
-                    }  
+                    }
                 });
             });
 

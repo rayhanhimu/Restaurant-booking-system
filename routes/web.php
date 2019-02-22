@@ -17,7 +17,14 @@ Route::get('/', function () {
 
 Route::post('/restaurant_list', 'HomeController@show_restaurants')->name('restaurant_list');
 
+Route::get('/search', 'HomeController@search_restaurants')->name('restaurant_search');
+
 Route::get('/restaurant_details/{id}', 'HomeController@show_restaurant_details')->name('restaurant_details');
+
+Route::post('/addToCart', 'CartController@addToCart')->name('addToCart');
+
+Route::post('/updateQuantity', 'CartController@updateQuantity')->name('updateQuantity');
+Route::post('/removeFromCart', 'CartController@removeFromCart')->name('removeFromCart');
 
 Auth::routes();
 

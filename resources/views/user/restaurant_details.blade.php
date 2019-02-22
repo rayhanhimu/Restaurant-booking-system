@@ -97,8 +97,7 @@
                                         <td style="border-top: 0px" class="col-md-3">{{ $menu->price }}tk</td>
 
                                     <td style="border-top: 0px" class="col-md-3" align="right">
-                                        <button class="btn btn-info">ADD</button>
-
+                                        <button class="btn btn-info" onclick="addToCart({{ $menu->id }})">ADD</button>
                                     </td>
                                 </tr>
                             @endforeach
@@ -111,35 +110,44 @@
 
     <div class="col-md-4">
 
-        <div class="panel">
+        <div class="panel" id="order_details">
             <div class="panel-heading">
                 <h3 class="panel-title text_hedding">Your Order</h3>
             </div>
             <div class="panel-body">
                 <ul class="list-group">
-                    <li class="list-group-item" style="border:none;">
-                        <h5>Sub Sandwich BBQ Chicken 6 Inch</h5>
-                        <div>
-                            <div class="col-md-6">
-                                <div class="col-md-3">
-                                    <button class="btn btn-warning">+</button>
+                    @if(Session::has('cart'))
+                        @php
+                            $total = 0;
+                        @endphp
+                        @foreach (Session::get('cart') as $key => $item)
+                            @php
+                                $menu = \App\FoodMenu::find($item['id']);
+                            @endphp
+                            <li class="list-group-item" style="border:none; margin-bottom: 10px;">
+                                <h5>{{ $menu->name }}</h5>
+                                <div>
+                                    <div class="col-sm-4">
+                                        <input type="number" class="form-control" name="quantity" onchange="updateQuantity({{ $key }}, this)" value="{{ $item['quantity'] }}">
+                                    </div>
+                                    <div class="col-sm-6">
+                                        @php
+                                            $total = $total + $item['price'] * $item['quantity'];
+                                        @endphp
+                                        <h5>{{ $item['price'] * $item['quantity'] }} <strong>Tk</strong></h5>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <button type="button" class="btn btn-danger" name="button" onclick="removeFromCart({{ $key }})">Remove</button>
+                                    </div>
                                 </div>
-                                <div class="col-md-3">
-                                    <h5>2</h5>
-                                </div>
-                                <div class="col-md-3">
-                                    <button class="btn btn-danger">-</button>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <h5>300 <strong>Tk</strong></h5>
-                            </div>
-                        </div>
-                    </li>
+                            </li>
+                        @endforeach
+                    @endif
                 </ul>
+
             </div>
             <div class="panel-footer">
-                <h5>Total 300 <strong>Tk</strong></h5>
+                <h5>Total {{ $total }} <strong>Tk</strong></h5>
                 <button class="btn btn-lg btn-warning" style="width: 100%;">Checkout</button>
             </div>
         </div>
@@ -148,5 +156,27 @@
 
 </div>
 
+@endsection
 
+@section('script')
+    <script type="text/javascript">
+        function addToCart(id){
+            $.post('{{ route('addToCart') }}',{_token:'{{ @csrf_token() }}', id:id}, function(data){
+                $('#order_details').html(data);
+            });
+        }
+
+        function updateQuantity(key, em){
+            var quantity = $(em).val();
+            $.post('{{ route('updateQuantity') }}',{_token:'{{ @csrf_token() }}', key:key, quantity: quantity}, function(data){
+                $('#order_details').html(data);
+            });
+        }
+
+        function removeFromCart(key){
+            $.post('{{ route('removeFromCart') }}',{_token:'{{ @csrf_token() }}', key:key}, function(data){
+                $('#order_details').html(data);
+            });
+        }
+    </script>
 @endsection

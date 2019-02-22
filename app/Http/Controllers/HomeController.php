@@ -42,6 +42,12 @@ class HomeController extends Controller
         return view('user.restaurant_list', compact('restaurants'));
     }
 
+    public function search_restaurants(Request $request)
+    {
+        $restaurants = Restaurant::where('name', 'like', '%'.$request->name.'%')->get();
+        return view('user.restaurant_list', compact('restaurants'));
+    }
+
     public function show_restaurant_details($id)
     {
         $restaurant = Restaurant::find($id);

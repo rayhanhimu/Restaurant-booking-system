@@ -12,7 +12,9 @@
 
 		<div class="col-sm-6 form-group">
 
-			<input class="form-control searchBar" type="text" placeholder="Search restaurant">
+			<form class="" action="{{ route('restaurant_search') }}" method="get">
+				<input class="form-control searchBar" type="text" name="name" placeholder="Search restaurant">
+			</form>
 
 		</div>
 
