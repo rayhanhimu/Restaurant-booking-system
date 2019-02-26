@@ -1,49 +1,46 @@
 @extends('layouts.app')
 
 @section('content')
+
 <div>
+    @foreach ($bookings as $key => $booking)
         <div class="panel">
             <div class="panel-heading">
                 <div class="col-md-10">
-                    <h3 class="panel-title">Current date</h3>
+                    <h3 class="panel-title">Date: {{ date('d-m-Y', $booking->date) }} ({{ ucfirst($booking->payment_status) }})</h3>
                 </div>
-               
+
             </div>
-            <div class="panel-body">  
+            <div class="panel-body">
                 <table class="table table-responsive">
                     <tbody>
                         <tr style="border: 1px solid rgba(255,255,255,0.03);">
                             <div class="row">
-                                <td style="border-top: 0px" class="col-md-1">Rayhan</td>
-                                <td style="border-top: 0px" class="col-md-2 text-center">01776231545</td>
-                                <td style="border-top: 0px" class="col-md-1 text-center">09:30AM</td>
-                                 <td style="border-top: 0px" class="col-md-1 text-center">10 person</td>
-                                  <td style="border-top: 0px" class="col-md-5 text-center">
-                                    <div class="col-md-6">
-                                        <li class="list-group-item">soup</li>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <li class="list-group-item">burger</li>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <li class="list-group-item">fried chiccken</li>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <li class="list-group-item">7UP</li>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <li class="list-group-item">soft drink</li>
-                                    </div>
+                                <td style="border-top: 0px" class="col-md-1">{{ $booking->name }}</td>
+                                <td style="border-top: 0px" class="col-md-2 text-center">{{ $booking->phone }}</td>
+                                <td style="border-top: 0px" class="col-md-1 text-center">{{ $booking->time }}</td>
+                                <td style="border-top: 0px" class="col-md-1 text-center">{{ $booking->people }} person</td>
+                                <td style="border-top: 0px" class="col-md-1 text-center">
+                                    @if ($booking->table_ids != null)
+                                        @foreach (json_decode($booking->table_ids) as $table_id)
+                                            {{ \App\Table::find($table_id)->name }}
+                                        @endforeach
+                                    @endif
                                 </td>
-                                <td style="border-top: 0px" class="col-md-1" align="right"><span class="badge badge-success">Paid</span></td>
-                                 <td style="border-top: 0px" class="col-md-1" align="right"><span class="badge badge-danger">Unpaid</span></td>
-                               
+                                <td style="border-top: 0px" class="col-md-5 text-center">
+                                    @foreach ($booking->bookingDetails as $key => $detail)
+                                        <div class="col-md-6">
+                                            <li class="list-group-item">{{ $detail->foodMenu->name }} ({{ $detail->quantity }})</li>
+                                        </div>
+                                    @endforeach
+                                </td>
                             </div>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
-    </div>
+    @endforeach
+</div>
 
 @endsection

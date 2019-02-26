@@ -15,4 +15,14 @@ class Restaurant extends Model
     {
         return $this->hasMany(FoodCategory::class);
     }
+
+    public function tables()
+    {
+        return $this->hasMany(Table::class);
+    }
+
+    public function timeConfigs()
+    {
+        return $this->hasMany(TimeConfig::class);
+    }
 }

@@ -25,6 +25,18 @@ Route::post('/addToCart', 'CartController@addToCart')->name('addToCart');
 
 Route::post('/updateQuantity', 'CartController@updateQuantity')->name('updateQuantity');
 Route::post('/removeFromCart', 'CartController@removeFromCart')->name('removeFromCart');
+Route::post('/checkout', 'CheckoutController@checkout')->name('checkout');
+
+// SSLCOMMERZ Start
+Route::get('/sslcommerz/pay', 'PublicSslCommerzPaymentController@index');
+Route::POST('/sslcommerz/success', 'PublicSslCommerzPaymentController@success');
+Route::POST('/sslcommerz/fail', 'PublicSslCommerzPaymentController@fail');
+Route::POST('/sslcommerz/cancel', 'PublicSslCommerzPaymentController@cancel');
+Route::POST('/sslcommerz/ipn', 'PublicSslCommerzPaymentController@ipn');
+//SSLCOMMERZ END
+
+
+Route::post('/available-times', 'TimeConfigController@getAvailableTimes')->name('available-times');
 
 Auth::routes();
 
@@ -41,13 +53,25 @@ Route::group([ 'prefix' => 'admin','middleware'=> ['auth', 'admin']], function()
     Route::resource('/food_menus', 'FoodMenuController');
 	Route::get('/food_menus/destroy/{id}', 'FoodMenuController@destroy')->name('food_menus.destroy');
 
-	Route::get('/bookings', function(){
-		return view('admin.bookings.index');
-	})->name('bookings');
+    Route::get('tables/show', 'RestaurantTableController@showTables')->name('tables.show');
+    Route::get('/tables/add', 'RestaurantTableController@showAddTableForm')->name('tables.add');
+    Route::post('/tables/insert', 'RestaurantTableController@insertRestaurantTable')->name('tables.insert');
+    Route::post('/tables/edit', 'RestaurantTableController@showEditTableForm')->name('tables.edit');
+    Route::post('/tables/update', 'RestaurantTableController@updateRestaurantTable')->name('tables.update');
+    Route::get('/tables/delete/{id}', 'RestaurantTableController@deleteRestaurantTable')->name('tables.delete');
 
-	Route::get('/requests', function(){
-		return view('admin.requests.index');
-	})->name('requests');
+    Route::get('/timeConfigs/show', 'TimeConfigController@showTimeConfig')->name('timeConfig.show');
+    Route::get('/timeConfigs/add', 'TimeConfigController@showAddTimeConfigForm')->name('timeConfig.add');
+    Route::post('/timeConfigs/insert', 'TimeConfigController@insertTimeConfig')->name('timeConfig.insert');
+    Route::post('/timeConfigs/update', 'TimeConfigController@updateTimeConfig')->name('timeConfig.update');
+
+	Route::get('/bookings', 'BookingController@bookings')->name('bookings');
+
+	Route::get('/bookings/approve/{id}', 'BookingController@approve')->name('approve');
+
+    Route::get('/bookings/reject/{id}', 'BookingController@reject')->name('reject');
+
+    Route::get('/requests', 'BookingController@booking_requests')->name('requests');
 
 	Route::get('/reviews', function(){
 		return view('admin.reviews.index');
@@ -75,7 +99,8 @@ Route::group(['middleware' => ['auth']], function(){
 
 	Route::resource('/restaurants', 'RestaurantController');
 	Route::get('/restaurants/destroy/{id}', 'RestaurantController@destroy')->name('restaurants.destroy');
-
+    Route::get('/restaurants/approve/{id}', 'RestaurantController@approve')->name('restaurants.approve');
+    Route::post('/restaurants/photo', 'RestaurantController@photo')->name('restaurants.photo');
 });
 
 /*Route::get('/user',function(){

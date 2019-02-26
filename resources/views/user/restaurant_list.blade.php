@@ -27,7 +27,7 @@
 					<div class="restaurant_box_content">
 						<div class="row">
 							<div class="col-md-7">
-								<img src="{{ asset('img/img2.jpg') }}" class="img img-responsive image_style">
+								<img src="{{ asset($restaurant->photo) }}" class="img img-responsive image_style">
 							</div>
 							<div class="col-md-5">
 								<h2>{{ $restaurant->name }}</h2>

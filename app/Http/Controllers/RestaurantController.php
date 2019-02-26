@@ -93,4 +93,25 @@ class RestaurantController extends Controller
     {
         //
     }
+
+    public function approve($id)
+    {
+        $restaurant = Restaurant::find($id);
+        $restaurant->status = 1;
+        $restaurant->save();
+
+        flash('Restaurant approved')->success();
+
+        return redirect()->route('home');
+    }
+
+    public function photo(Request $request)
+    {
+        if($request->hasFile('photo')){
+            $restaurant = Auth::user()->restaurant;
+            $restaurant->photo = $request->photo->store('uploads');
+            $restaurant->save();
+        }
+        return redirect()->route('home');
+    }
 }

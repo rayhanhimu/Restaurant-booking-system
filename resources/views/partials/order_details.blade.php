@@ -1,9 +1,9 @@
 <div class="panel-heading">
     <h3 class="panel-title text_hedding">Your Order</h3>
 </div>
-<div class="panel-body">
-    <ul class="list-group">
-        @if(Session::has('cart'))
+@if(Session::has('cart'))
+    <div class="panel-body">
+        <ul class="list-group">
             @php
                 $total = 0;
             @endphp
@@ -11,7 +11,7 @@
                 @php
                     $menu = \App\FoodMenu::find($item['id']);
                 @endphp
-                <li class="list-group-item" style="border:none; margin-bottom: 10px;">
+                <li class="list-group-item row" style="border:none; margin-bottom: 10px;">
                     <h5>{{ $menu->name }}</h5>
                     <div>
                         <div class="col-sm-4">
@@ -29,11 +29,11 @@
                     </div>
                 </li>
             @endforeach
-        @endif
-    </ul>
+        </ul>
 
-</div>
-<div class="panel-footer">
-    <h5>Total {{ $total }} <strong>Tk</strong></h5>
-    <button class="btn btn-lg btn-warning" style="width: 100%;">Checkout</button>
-</div>
+    </div>
+    <div class="panel-footer">
+        <h5>Total {{ $total }} <strong>Tk</strong></h5>
+        <button class="btn btn-lg btn-warning" onclick="show_modal()" style="width: 100%;">Checkout</button>
+    </div>
+@endif

@@ -47,6 +47,10 @@
             <div id="content-container">
                 <div id="page-content">
 
+                    <div id="alert" class="text-center col-md-12" align="right">
+                        @include('flash::message')
+                    </div>
+                    
                     @yield('content')
 
                 </div>
@@ -75,7 +79,6 @@
         <!--BootstrapJS [ RECOMMENDED ]-->
         <script src="{{ asset('js/bootstrap.min.js') }}"></script>
 
-
         <!--NiftyJS [ RECOMMENDED ]-->
         <script src="{{ asset('js/nifty.min.js') }}"></script>
 
@@ -83,7 +86,7 @@
         <script src="{{asset('js/demo/ui-alerts.js') }}"></script>
 
         <!--Bootstrap Wizard [ OPTIONAL ]-->
-        <script src="{{ asset('plugins/bootstrap-wizard/jquery.bootstrap.wizard.min.js')}}"></script>
+        {{-- <script src="{{ asset('plugins/bootstrap-wizard/jquery.bootstrap.wizard.min.js')}}"></script> --}}
 
 
         <!--Form Wizard [ SAMPLE ]-->

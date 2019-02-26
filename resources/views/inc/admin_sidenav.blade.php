@@ -94,6 +94,20 @@
                         </li>
 
                         <li>
+                            <a class="nav-link" href="{{ route('tables.show') }}">
+                                <i class="demo-pli-home"></i>
+                                <span class="menu-title">Tables</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a class="nav-link" href="{{ route('timeConfig.show') }}">
+                                <i class="demo-pli-home"></i>
+                                <span class="menu-title">Time Configuration</span>
+                            </a>
+                        </li>
+
+                        <li>
                             <a class="nav-link" href="{{ route('bookings') }}">
                                 <i class="demo-pli-home"></i>
                                 <span class="menu-title">Bookings</span>

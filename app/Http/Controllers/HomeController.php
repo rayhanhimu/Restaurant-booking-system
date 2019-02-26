@@ -38,13 +38,19 @@ class HomeController extends Controller
 
     public function show_restaurants(Request $request)
     {
-        $restaurants = Restaurant::where('area_id', $request->area)->get();
+        if($request->area != null){
+            $restaurants = Restaurant::where('area_id', $request->area)->where('status', 1)->get();
+        }
+        else{
+            $restaurants = Restaurant::where('status', 1)->get();
+        }
+
         return view('user.restaurant_list', compact('restaurants'));
     }
 
     public function search_restaurants(Request $request)
     {
-        $restaurants = Restaurant::where('name', 'like', '%'.$request->name.'%')->get();
+        $restaurants = Restaurant::where('name', 'like', '%'.$request->name.'%')->where('status', 1)->get();
         return view('user.restaurant_list', compact('restaurants'));
     }
 

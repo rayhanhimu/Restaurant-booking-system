@@ -15,7 +15,7 @@ class FoodCategoryController extends Controller
      */
     public function index()
     {
-        $categories = FoodCategory::all();
+        $categories = FoodCategory::where('restaurant_id', Auth::user()->restaurant->id)->get();
         return view('admin.category.index', compact('categories'));
     }
 

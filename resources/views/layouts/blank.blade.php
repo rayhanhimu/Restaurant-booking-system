@@ -21,6 +21,10 @@
     <!--Nifty Stylesheet [ REQUIRED ]-->
     <link href="{{ asset('css/nifty.min.css')}}" rel="stylesheet">
 
+    <link href="{{ asset('css/bootstrap-datepicker.min.css')}}" rel="stylesheet">
+
+    <link href="{{ asset('css/bootstrap-timepicker.min.css')}}" rel="stylesheet">
+
     <!--Nifty Premium Icon [ DEMONSTRATION ]-->
     <link href="{{ asset('css/demo/nifty-demo-icons.min.css')}}" rel="stylesheet">
 
@@ -36,6 +40,9 @@
     <!--Select2 [ OPTIONAL ]-->
     <link href="{{ asset('plugins/select2/css/select2.min.css')}}" rel="stylesheet">
 
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/colors/main.css') }}" id="colors">
+
 
     <!--Unite Gallery [ OPTIONAL ]-->
     <link href="{{  asset('plugins/unitegallery/css/unitegallery.min.css') }}" rel="stylesheet">
@@ -47,6 +54,9 @@
     <div id="container" class="cls-container">
         @include('inc.user_nav')
         <div class="cls-content">
+            <div id="alert" class="text-center col-md-12" align="right">
+                        @include('flash::message')
+                    </div>
             @yield('content')
         </div>
     </div>
@@ -60,7 +70,8 @@
 
     <!--BootstrapJS [ RECOMMENDED ]-->
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
-
+    <script src="{{ asset('js/bootstrap-datepicker.min.js') }}"></script>
+    <script src="{{ asset('js/bootstrap-timepicker.min.js') }}"></script>
 
     <!--NiftyJS [ RECOMMENDED ]-->
     <script src="{{ asset('js/nifty.min.js') }}"></script>
@@ -73,6 +84,8 @@
 
     <!--Form Component [ SAMPLE ]-->
     <script src="{{ asset('js/custom.js')}}"></script>
+
+    @include('partials.modal')
 
     @yield('script')
 

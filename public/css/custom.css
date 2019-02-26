@@ -96,3 +96,7 @@
 	max-width: 100% !important;
 	max-height: 300px !important;
 }
+
+.bootstrap-timepicker-widget{
+	z-index: 100000;
+}

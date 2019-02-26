@@ -2,7 +2,7 @@
 
 @section('content')
 <div>
-	@foreach (\App\FoodCategory::all() as $key => $category)
+	@foreach (\App\FoodCategory::where('restaurant_id', Auth::user()->restaurant->id)->get() as $key => $category)
 		<div class="col-sm-6">
 			<div class="panel">
 			    <div class="panel-heading">
@@ -16,7 +16,7 @@
 			    <div class="panel-body">
 				    <table class="table table-responsive">
 				    	<tbody>
-				    		@foreach ($category->FoodMenus as $key => $menu)
+				    		@foreach ($category->FoodMenus as $menu)
 								<tr style="border: 1px solid rgba(255,255,255,0.03);">
 									<td style="border-top: 0px" class="col-sm-3">{{ $menu->name }}</td>
 									<td style="border-top: 0px" class="col-sm-3 text-center">{{ $menu->ratio }}</td>

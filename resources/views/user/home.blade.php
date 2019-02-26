@@ -67,7 +67,7 @@
                                     <label class="col-sm-4 control-label" for="name">City Name</label>
                                     <div class="col-sm-4">
 										<select class="form-control" name="city" id="city-restaurant" required>
-											<option>Select your city</option>
+											<option value="">Select your city</option>
 											@foreach(\App\City::all() as $city)
 												<option value="{{ $city->id }}">{{ $city->name }}</option>
 											@endforeach
@@ -79,7 +79,7 @@
                                     <label class="col-sm-4 control-label" for="name">Area Name</label>
                                     <div class="col-sm-4">
 										<select class="form-control" name="area" id="area-restaurant" required>
-											<option>Select your Area</option>
+											<option value="">Select your Area</option>
 										</select>
 									</div>
                                 </div>
@@ -113,10 +113,6 @@
 				var city_id = $('#city').val();
 				$.post('{{ route('cities.getareas') }}', {_token:'{{ @csrf_token() }}', city_id:city_id}, function(data){
 					$('#area').html(null);
-					$('#area').append($('<option>', {
-						value: null,
-						text: 'Select your Area'
-					}));
 		            for (var i = 0; i < data.length; i++) {
 		                $('#area').append($('<option>', {
 		                    value: data[i].id,
