@@ -8,7 +8,7 @@
                     <div id="mainnav-profile" class="mainnav-profile">
                         <div class="profile-wrap text-center">
                             <div class="pad-btm">
-                                <img class="img-circle img-md" src="{{ asset('img/profile-photos/1.png') }}" alt="Profile Picture">
+                                <img class="img-circle img-md" src="{{ asset(Auth::user()->photo) }}" alt="Profile Picture">
                             </div>
                             <a href="#profile-nav" class="box-block" data-toggle="collapse" aria-expanded="false">
                                 <span class="pull-right dropdown-toggle">
@@ -19,7 +19,7 @@
                             </a>
                         </div>
                         <div id="profile-nav" class="collapse list-group bg-trans">
-                            <a href="#" class="list-group-item">
+                            <a href="{{route('profile')}}" class="list-group-item">
                                 <i class="demo-pli-male icon-lg icon-fw"></i> View Profile
                             </a>
 

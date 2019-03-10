@@ -77,6 +77,24 @@ class TimeConfigController extends Controller
     	$timeConfig = TimeConfig::where('restaurant_id',$request->id)->where('day', $day)->first();
         $capacity = Table::where('restaurant_id', $request->id)->sum('capacity');
 
-    	return view('partials.available-times', ['timeConfig'=>$timeConfig, 'date'=>$date, 'people'=>$people, 'capacity'=>$capacity]);
+        $data = array(
+                    'options' => view('partials.available-times', ['timeConfig'=>$timeConfig, 'date'=>$date, 'people'=>$people, 'capacity'=>$capacity])->render()
+                );
+
+    	return $data;
+    }
+
+    public function available_capacity(Request $request)
+    {
+        $day = date('l', strtotime($request->date));
+        $date = strtotime($request->date);
+        $capacity = Table::where('restaurant_id', $request->id)->sum('capacity');
+        $available = $capacity;
+        $bookings = \App\Booking::where('date', $date)->where('time', date("H:i:s", strtotime($request->time)))->get();
+        foreach ($bookings as $booking) {
+            $available -= $booking->people;
+        }
+
+        return $available;
     }
 }

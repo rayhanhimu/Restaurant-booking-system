@@ -34,6 +34,6 @@
     </div>
     <div class="panel-footer">
         <h5>Total {{ $total }} <strong>Tk</strong></h5>
-        <button class="btn btn-lg btn-warning" onclick="show_modal()" style="width: 100%;">Checkout</button>
+        <a class="btn btn-lg btn-warning" href="{{ route('order', $restaurant_id) }}" style="width: 100%;">Checkout</a>
     </div>
 @endif

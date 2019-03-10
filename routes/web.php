@@ -27,6 +27,8 @@ Route::post('/updateQuantity', 'CartController@updateQuantity')->name('updateQua
 Route::post('/removeFromCart', 'CartController@removeFromCart')->name('removeFromCart');
 Route::post('/checkout', 'CheckoutController@checkout')->name('checkout');
 
+Route::get('/order/{id}', 'CheckoutController@show_order')->name('order');
+
 // SSLCOMMERZ Start
 Route::get('/sslcommerz/pay', 'PublicSslCommerzPaymentController@index');
 Route::POST('/sslcommerz/success', 'PublicSslCommerzPaymentController@success');
@@ -38,6 +40,8 @@ Route::POST('/sslcommerz/ipn', 'PublicSslCommerzPaymentController@ipn');
 
 Route::post('/available-times', 'TimeConfigController@getAvailableTimes')->name('available-times');
 
+Route::post('/available-capacity', 'TimeConfigController@available_capacity')->name('available-capacity');
+
 Auth::routes();
 
 Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
@@ -48,6 +52,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::group([ 'prefix' => 'admin','middleware'=> ['auth', 'admin']], function(){
 
     Route::resource('/food_categories', 'FoodCategoryController');
+    Route::resource('/areas', 'AreaController');
+    Route::resource('/cities', 'CityController');
 	Route::get('/food_categories/destroy/{id}', 'FoodCategoryController@destroy')->name('food_categories.destroy');
 
     Route::resource('/food_menus', 'FoodMenuController');
@@ -77,9 +83,7 @@ Route::group([ 'prefix' => 'admin','middleware'=> ['auth', 'admin']], function()
 		return view('admin.reviews.index');
 	})->name('reviews');
 
-	Route::get('/profile', function(){
-		return view('admin.profile');
-	})->name('profile');
+    Route::get('/reviews/destroy/{id}', 'ReviewController@destroy')->name('reviews.destroy');
 });
 
 Route::post('/cities/getareas', 'CityController@getAreasByCity')->name('cities.getareas');
@@ -101,7 +105,19 @@ Route::group(['middleware' => ['auth']], function(){
 	Route::get('/restaurants/destroy/{id}', 'RestaurantController@destroy')->name('restaurants.destroy');
     Route::get('/restaurants/approve/{id}', 'RestaurantController@approve')->name('restaurants.approve');
     Route::post('/restaurants/photo', 'RestaurantController@photo')->name('restaurants.photo');
+
+    Route::get('/profile', function(){
+		return view('profile');
+	})->name('profile');
+
+    Route::post('/update-profile', 'HomeController@updateProfile')->name('profile.update');
+
+    Route::get('/user/bookings', 'BookingController@user_bookings')->name('user.bookings');
 });
+
+Route::post('/reviews/store', 'ReviewController@store')->name('reviews.store');
+
+Route::get('/bookings/cancel/{id}', 'BookingController@cancel')->name('booking.cancel');
 
 /*Route::get('/user',function(){
 

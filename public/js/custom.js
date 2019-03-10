@@ -19,7 +19,7 @@ $(document).on('nifty.ready', function() {
         allowClear: true
     });
 
-    $('#demo-dp-txtinput input').datepicker();
+    $('#demo-dp-txtinput input').datepicker({'startDate': new Date()});
 
     $('#demo-tp-textinput').timepicker({
         minuteStep: 5,

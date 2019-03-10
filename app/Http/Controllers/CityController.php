@@ -62,7 +62,8 @@ class CityController extends Controller
      */
     public function edit($id)
     {
-        //
+        $city = City::find($id);
+        return view('systemadmin.city.edit', compact('city'));
     }
 
     /**
@@ -74,7 +75,11 @@ class CityController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+            $city = City::find($id);
+            $city->name = $request->name;
+            $city->save();
+            return back();
     }
 
     /**

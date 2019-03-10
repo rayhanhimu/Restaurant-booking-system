@@ -19,7 +19,7 @@
 							<tr style="border: 1px solid rgba(255,255,255,0.03);">
 								<td style="border-top: 0px" class="col-sm-3">{{ $category->name }}</td>
 								<td style="border-top: 0px" class="col-sm-3" align="right">
-									<button class="btn btn-info"><i class="demo-psi-pen-5 icon-lg"></i></button>
+									<button class="btn btn-info" onclick="edit_category({{ $category->id }})"><i class="demo-psi-pen-5 icon-lg"></i></button>
 									<button class="btn btn-danger" onclick="confirm_modal('{{ route('food_categories.destroy', $category->id) }}')"><i class="demo-psi-recycling icon-lg"></i></button>
 								</td>
 							</tr>
@@ -59,4 +59,17 @@
 	    </div>
 	</div>
 
+@endsection
+
+@section('script')
+	<script type="text/javascript">
+		function edit_category(id){
+			var url = '{{ route('food_categories.edit', 'id') }}';
+			url = url.replace('id', id);
+			$.get(url,{_token:'{{ @csrf_token() }}'}, function(data){
+				$('#content').html(data);
+				$('#edit-modal').modal('show');
+			})
+		}
+	</script>
 @endsection

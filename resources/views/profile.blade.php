@@ -31,7 +31,7 @@
 					                                    <span class="wz-icon icon-txt text-bold">2</span>
                         <i class="wz-icon-done demo-psi-like"></i>
                         </span>
-                        <small class="wz-desc box-block text-semibold">Profile</small>
+                        <small class="wz-desc box-block text-semibold">Password</small>
                     </a>
                 </li>
                 <li class="col-xs-4">
@@ -47,7 +47,8 @@
         </div>
 
         <!--Form-->
-        <form class="form-horizontal">
+        <form class="form-horizontal" action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data">
+            @csrf
             <div class="panel-body">
                 <div class="tab-content">
 
@@ -56,13 +57,13 @@
                         <div class="form-group">
                             <label class="col-lg-3 control-label">Email</label>
                             <div class="col-lg-7">
-                                <input type="email" class="form-control" name="email" placeholder="Email" disabled>
+                                <input type="email" class="form-control" name="email" placeholder="Email" value="{{ Auth::user()->email }}" disabled>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-lg-3 control-label">Name</label>
                             <div class="col-lg-7">
-                                <input type="text" class="form-control" name="name" placeholder="Name">
+                                <input type="text" class="form-control" name="name" placeholder="Name"value="{{ Auth::user()->name }}">
                             </div>
                         </div>
                         <div class="form-group">
@@ -100,19 +101,19 @@
                         <div class="form-group">
                             <label class="col-lg-3 control-label">Phone Number</label>
                             <div class="col-lg-7">
-                                <input type="text" placeholder="Phone number" name="phoneNumber" class="form-control">
+                                <input type="text" placeholder="Phone number" name="phone" class="form-control" value="{{ Auth::user()->phone }}">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-lg-3 control-label">Address</label>
                             <div class="col-lg-7">
-                                <input type="text" placeholder="Address" name="address" class="form-control">
+                                <input type="text" placeholder="Address" name="address" class="form-control" value="{{ Auth::user()->address }}">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-lg-3 control-label">Website</label>
                             <div class="col-lg-7">
-                                <input type="text" placeholder="Website" name="website" class="form-control">
+                                <input type="text" placeholder="Website" name="website" class="form-control" value="{{ Auth::user()->website }}">
                             </div>
                         </div>
                     </div>
@@ -122,9 +123,7 @@
             <!--Footer button-->
             <div class="panel-footer text-right">
                 <div class="box-inline">
-                    <button type="button" class="previous btn btn-info">Previous</button>
-                    <button type="button" class="next btn btn-info" style="">Next</button>
-                    <button type="button" class="finish btn btn-info" style="display: none;" disabled="">Finish</button>
+                    <button type="submit" class="finish btn btn-info">Finish</button>
                 </div>
             </div>
         </form>

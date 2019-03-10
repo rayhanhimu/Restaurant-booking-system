@@ -6,8 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class FoodMenu extends Model
 {
-    public function FoodCategories(){
-
-    return $this->belongsTo(FoodCategory::class);
+    public function FoodCategory(){
+        return $this->belongsTo(FoodCategory::class);
     }
 }

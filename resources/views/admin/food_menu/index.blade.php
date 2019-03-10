@@ -22,8 +22,8 @@
 									<td style="border-top: 0px" class="col-sm-3 text-center">{{ $menu->ratio }}</td>
 									<td style="border-top: 0px" class="col-sm-3" align="right"><span class="badge badge-success">{{ $menu->price }}tk</span></td>
 									<td style="border-top: 0px" class="col-sm-3" align="right">
-										<a href="#" class="btn btn-mint btn-icon"><i class="demo-psi-pen-5 icon-lg"></i></a>
-										<a onclick="confirm_modal('{{ route('food_menus.destroy', $menu->id) }}');" class="btn btn-danger btn-icon"><i class="demo-psi-recycling icon-lg"></i></a>
+										<button class="btn btn-info" onclick="edit_menu('{{ $menu->id }}')"><i class="demo-psi-pen-5 icon-lg"></i></button>
+										<button class="btn btn-danger" onclick="confirm_modal('{{ route('food_menus.destroy', $menu->id) }}')"><i class="demo-psi-recycling icon-lg"></i></button>
 									</td>
 								</tr>
 				    		@endforeach
@@ -33,13 +33,12 @@
 			</div>
 		</div>
 	@endforeach
-
 		<div id="demo-sm-modal" class="modal fade in">
 		    <div class="modal-dialog bootbox">
 		        <div class="modal-content">
 		            <div class="modal-header">
 		                <button type="button" class="close" data-dismiss="modal"><i class="pci-cross pci-circle"></i></button>
-		                <h4 class="modal-title" id="mySmallModalLabel">Area Name</h4>
+		                <h4 class="modal-title" id="mySmallModalLabel">Food Name</h4>
 		            </div>
 					<form class="form-horizontal" action="{{ route('food_menus.store') }}" method="POST">
 		            	@csrf
@@ -83,5 +82,14 @@
 			$('input[name=food_category_id]').val(id);
 	        $('#demo-sm-modal').modal('show', {backdrop: 'static'});
 	    }
+		
+		function edit_menu(id){
+			var url = '{{ route('food_menus.edit', 'id') }}';
+			url = url.replace('id', id);
+			$.get(url,{_token:'{{ @csrf_token() }}'}, function(data){
+				$('#content').html(data);
+				$('#edit-modal').modal('show');
+			})
+		}
 	</script>
 @endsection

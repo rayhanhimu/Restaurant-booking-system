@@ -64,7 +64,8 @@ class FoodCategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $category = FoodCategory::find($id);
+        return view('admin.category.edit', compact('category'));
     }
 
     /**
@@ -76,7 +77,11 @@ class FoodCategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $category = FoodCategory::find($id);
+        $category->name = $request->name;
+        $category->save();
+
+        return back();
     }
 
     /**

@@ -36,7 +36,7 @@
                                     <div class="col-md-12">
                                         <h5>Restaurant Type</h5>
                                         <select class="chosen-select-no-single" name="restaurant_type_id" required="true">
-                                                @foreach(json_decode($restaurantTable->restaurant->restaurant_type_id) as $restaurant_type)   
+                                                @foreach(json_decode($restaurantTable->restaurant->restaurant_type_id) as $restaurant_type)
                                                     <option value="{{ $restaurant_type }}" <?php if($restaurant_type == $restaurantTable->restaurant_type_id) echo "selected"; ?> >
                                                         {{ \App\RestaurantType::find($restaurant_type)->name }}
                                                     </option>
@@ -61,7 +61,7 @@
                             </div>
                         </div>
                     </form>
-                </div>                      
+                </div>
             </div>
         </div>
     </div>

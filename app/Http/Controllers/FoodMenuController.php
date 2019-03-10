@@ -65,7 +65,8 @@ class FoodMenuController extends Controller
      */
     public function edit($id)
     {
-        //
+        $menu = FoodMenu::find($id);
+        return view('admin.food_menu.edit', compact('menu'));
     }
 
     /**
@@ -77,7 +78,13 @@ class FoodMenuController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $menu = FoodMenu::find($id);
+        $menu->name = $request->name;
+        $menu->ratio = $request->ratio;
+        $menu->price = $request->price;
+        $menu->save();
+
+        return back();
     }
 
     /**

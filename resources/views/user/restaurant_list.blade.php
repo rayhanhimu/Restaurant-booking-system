@@ -22,7 +22,7 @@
 
 	<div class="col-sm-12 box_container">
 		@foreach ($restaurants as $key => $restaurant)
-			<div class="col-sm-4 restaurant_box">
+			<div class="col-sm-4 restaurant_box" style="margin-bottom:10px;">
 				<a href="{{ route('restaurant_details', $restaurant->id) }}">
 					<div class="restaurant_box_content">
 						<div class="row">
@@ -31,7 +31,7 @@
 							</div>
 							<div class="col-md-5">
 								<h2>{{ $restaurant->name }}</h2>
-								<h3>Ratting: 4 </h3>
+								<h3>Rating: {{ ceil($restaurant->reviews->avg('rating')) }} </h3>
 								<h4>{{ $restaurant->area->name }},{{ $restaurant->area->city->name }}</h4>
 							</div>
 						</div>
@@ -40,6 +40,7 @@
 			</div>
 		@endforeach
 	</div>
+
 
 
 

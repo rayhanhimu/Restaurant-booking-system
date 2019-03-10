@@ -25,4 +25,14 @@ class Restaurant extends Model
     {
         return $this->hasMany(TimeConfig::class);
     }
+
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
+
+    public function bookings()
+    {
+        return $this->hasMany(Booking::class);
+    }
 }

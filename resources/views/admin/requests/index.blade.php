@@ -27,6 +27,8 @@
                                         </div>
                                     @endforeach
                                 </td>
+                                <td>Paid: {{ $booking->paid_amount }} Tk</td>
+                                <td>Due: {{ ($booking->total - $booking->paid_amount) }} Tk</td>
                                 <td style="border-top: 0px" class="col-md-1" align="right"><a href="{{ route('approve', $booking->id) }}" class="btn btn-success">Approve</a></td>
                                 <td style="border-top: 0px" class="col-md-1" align="right"><a href="{{ route('reject', $booking->id) }}" class="btn btn-danger">Reject</a></td>
                             </div>

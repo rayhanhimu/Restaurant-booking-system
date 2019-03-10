@@ -29,7 +29,7 @@ class PublicSslCommerzPaymentController extends Controller
             }
 
             $post_data = array();
-            $post_data['total_amount'] = $total; # You cant not pay less than 10
+            $post_data['total_amount'] = ($total*10)/100; # You cant not pay less than 10
             $post_data['currency'] = "BDT";
             $post_data['tran_id'] = substr(md5($request->session()->get('booking_id')), 0, 10); // tran_id must be unique
 

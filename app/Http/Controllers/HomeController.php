@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
+use Hash;
 use App\Restaurant;
 
 class HomeController extends Controller
@@ -32,8 +33,30 @@ class HomeController extends Controller
             return view('admin.home');
         }
         else{
-            abort(404);
+            return view('user.home');
         }
+    }
+
+    public function updateProfile(Request $request)
+    {
+        $user = Auth::user();
+        $user->name = $request->name;
+        $user->address = $request->address;
+        $user->phone = $request->phone;
+        $user->website = $request->website;
+        if($request->new_password != null && ($request->new_password == $request->retype_password)){
+            $user->password = Hash::make($request->new_password);
+        }
+        if($request->hasFile('photo')){
+            $user->photo = $request->photo->store('uploads');
+        }
+        if($user->save()){
+            flash(__('Your Profile has been updated successfully!'))->success();
+            return back();
+        }
+        flash(__('Sorry! Something went wrong.'))->error();
+
+        return back();
     }
 
     public function show_restaurants(Request $request)

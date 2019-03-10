@@ -42,6 +42,7 @@
 
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/colors/main.css') }}" id="colors">
+    <link rel="stylesheet" href="{{ asset('css/icons.css') }}" id="icons">
 
 
     <!--Unite Gallery [ OPTIONAL ]-->
@@ -88,6 +89,8 @@
     @include('partials.modal')
 
     @yield('script')
+
+
 
 </body>
 </html>

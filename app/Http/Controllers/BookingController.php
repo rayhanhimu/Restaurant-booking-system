@@ -8,6 +8,7 @@ use App\BookingDetail;
 use App\Table;
 use Session;
 use Auth;
+use Nexmo;
 
 class BookingController extends Controller
 {
@@ -17,11 +18,15 @@ class BookingController extends Controller
         $booking->restaurant_id = $request->restaurant_id;
         $booking->name = $request->name;
         $booking->phone = $request->phone;
+        $booking->email = $request->email;
         $booking->address = $request->address;
         $booking->people = $request->people;
-        $booking->date = strtotime($request->time);
+        $booking->date = strtotime($request->date);
         $booking->duration = $request->duration;
         $booking->time = $request->time;
+        if(Auth::check()){
+            $booking->user_id = Auth::user()->id;
+        }
         $booking->save();
 
         foreach (Session::get('cart') as $key => $item) {
@@ -38,6 +43,11 @@ class BookingController extends Controller
     public function bookings(){
         $bookings = Booking::where('restaurant_id', Auth::user()->restaurant->id)->where('status', 1)->get();
         return view('admin.bookings.index', compact('bookings'));
+    }
+
+    public function user_bookings(){
+        $bookings = Booking::where('user_id', Auth::user()->id)->get();
+        return view('user.bookings.index', compact('bookings'));
     }
 
     public function booking_requests(){
@@ -64,6 +74,12 @@ class BookingController extends Controller
         $booking->table_ids = json_encode($table_ids);
         $booking->save();
 
+        Nexmo::message()->send([
+            'to'   => '+88'.$booking->phone,
+            'from' => '+8801682506324',
+            'text' => 'Your booking at '.$booking->time.' for'.$booking->duration.' has been confirmed. Thank you.'
+        ]);
+
         return redirect()->route('requests');
     }
 
@@ -73,5 +89,13 @@ class BookingController extends Controller
         $booking->delete();
 
         return redirect()->route('requests');
+    }
+
+    public function cancel($id)
+    {
+        $booking = Booking::find($id);
+        $booking->delete();
+
+        return redirect()->route('user');
     }
 }

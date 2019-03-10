@@ -4,7 +4,7 @@
 
 <div>
 
-	<div style="background-image: url({{ asset('img/f1.jpg')}})"; class="home-background">
+	<div style="background-image: url({{ asset('img/2.jpg')}})"; class="home-background">
 		<div>
 			<h1 class="home-heading">Looking For a Party Place?<br> Book Now.</h1>
 		</div>

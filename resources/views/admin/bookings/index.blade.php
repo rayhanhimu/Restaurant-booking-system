@@ -34,6 +34,8 @@
                                         </div>
                                     @endforeach
                                 </td>
+                                <td>Paid: {{ $booking->paid_amount }} Tk</td>
+                                <td>Due: {{ $booking->total - $booking->paid_amount }} Tk</td>
                             </div>
                         </tr>
                     </tbody>

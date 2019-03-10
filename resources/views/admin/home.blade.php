@@ -58,7 +58,15 @@
                             <canvas id="demo-weather-xs-icon-1" width="48" height="48"></canvas>
                         </div>
                         <div class="media-body pad-lft">
-                            <p class="text-2x mar-no text-main">32</p>
+                            <p class="text-2x mar-no text-main">
+                                @php
+                                    $total_menu = 0;
+                                    foreach (Auth::user()->restaurant->food_categories as $key => $category) {
+                                        $total_menu += $category->FoodMenus->count();
+                                    }
+                                @endphp
+                                {{ $total_menu }}
+                            </p>
                             <p class="text-muted mar-no">Food Items</p>
                         </div>
                     </div>
@@ -75,7 +83,7 @@
                             <canvas id="demo-weather-xs-icon-1" width="48" height="48"></canvas>
                         </div>
                         <div class="media-body pad-lft">
-                            <p class="text-2x mar-no text-main">50</p>
+                            <p class="text-2x mar-no text-main">{{ Auth::user()->restaurant->bookings->where('status', 1)->count() }}</p>
                             <p class="text-muted mar-no">Bookings</p>
                         </div>
                     </div>
@@ -89,7 +97,7 @@
                             <canvas id="demo-weather-xs-icon-1" width="48" height="48"></canvas>
                         </div>
                         <div class="media-body pad-lft">
-                            <p class="text-2x mar-no text-main">32</p>
+                            <p class="text-2x mar-no text-main">{{ Auth::user()->restaurant->reviews->count() }}</p>
                             <p class="text-muted mar-no">Reviews</p>
                         </div>
                     </div>

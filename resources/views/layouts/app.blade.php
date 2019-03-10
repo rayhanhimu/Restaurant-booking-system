@@ -50,7 +50,7 @@
                     <div id="alert" class="text-center col-md-12" align="right">
                         @include('flash::message')
                     </div>
-                    
+
                     @yield('content')
 
                 </div>
@@ -61,6 +61,8 @@
             @include('inc.systemadmin_sidenav')
         @elseif(Auth::user()->user_type == "Admin")
             @include('inc.admin_sidenav')
+        @else
+            @include('inc.user_sidenav')
         @endif
 
         @include('inc.admin_footer')

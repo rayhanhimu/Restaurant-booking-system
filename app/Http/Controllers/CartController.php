@@ -23,7 +23,9 @@ class CartController extends Controller
                 $request->session()->put('cart', $cart);
             }
 
-            return view('partials.order_details');
+            $restaurant_id = $request->restaurant_id;
+
+            return view('partials.order_details', compact('restaurant_id'));
         }
 
         public function removeFromCart(Request $request)
@@ -34,7 +36,9 @@ class CartController extends Controller
                 $request->session()->put('cart', $cart);
             }
 
-            return view('partials.order_details');
+            $restaurant_id = $request->restaurant_id;
+
+            return view('partials.order_details', compact('restaurant_id'));
         }
 
         public function updateQuantity(Request $request)
@@ -48,7 +52,9 @@ class CartController extends Controller
             });
             $request->session()->put('cart', $cart);
 
-            return view('partials.order_details');
+            $restaurant_id = $request->restaurant_id;
+
+            return view('partials.order_details', compact('restaurant_id'));
         }
 
 }

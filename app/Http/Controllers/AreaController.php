@@ -62,7 +62,8 @@ class AreaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $area = Area::find($id);
+        return view('systemadmin.area.edit', compact('area'));
     }
 
     /**
@@ -74,7 +75,11 @@ class AreaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $area = Area::find($id);
+        $area->name = $request->name;
+        $area->save();
+
+        return back();
     }
 
     /**

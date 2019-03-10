@@ -25,7 +25,9 @@
                             <th>No.</th>
                             <th>Table Name</th>
                             <th>Capacity</th>
+                            <th>Photo</th>
                             <th>Action</th>
+
                         </tr>
 
                         @foreach($restaurantTables as $key => $restaurantTable)
@@ -33,7 +35,8 @@
                             <td data-label="Column 1">{{ $key+1 }}</td>
                             <td data-label="Column 2">{{ $restaurantTable->name }}</td>
                             <td data-label="Column 3">{{ $restaurantTable->capacity }}</td>
-                            <td data-label="Column 4">
+                            <td data-label="Column 4"><img src="{{ asset($restaurantTable->photo) }}" class="img-md" ></td>
+                            <td data-label="Column 5">
                                 <a onclick="confirm_modal('{{ route('tables.delete', $restaurantTable->id) }}');" class="btn btn-danger btn-icon"><i class="demo-psi-recycling icon-lg"></i></a>
                             </td>
                         </tr>

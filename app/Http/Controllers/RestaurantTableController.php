@@ -32,6 +32,7 @@ class RestaurantTableController extends Controller
     	$restaurantTable = new RestaurantTable;
     	$restaurantTable->name = $request->name;
     	$restaurantTable->capacity = $request->capacity;
+		$restaurantTable->photo = $request->photo->store('uploads');
     	$restaurantTable->restaurant_id = $restaurant->id;
     	$restaurantTable->save();
 
@@ -40,27 +41,27 @@ class RestaurantTableController extends Controller
         return redirect()->route('tables.show');
     }
 
-    public function showAddTableAutoForm(Request $request){
-    	$min = $request->min;
-    	$max = $request->max;
-    	return view('tables.add_auto', ['min' => $min, 'max' => $max, 'code' => $request->code]);
-    }
-
-    public function insertAutoRestaurantTable(Request $request){
-    	$restaurant = Restaurant::where('code', $request->code)->first();
-
-    	for($i=0; $i<count($request->name); $i++){
-    		$restaurantTable = new RestaurantTable;
-    		$restaurantTable->name = $request->name[$i];
-    		$restaurantTable->capacity = $request->capacity[$i];
-    		$restaurantTable->restaurant_id = $restaurant->id;
-    		$restaurantTable->save();
-    	}
-
-    	flash('Table inserted')->success();
-
-        return redirect()->route('tables.show');
-    }
+    // public function showAddTableAutoForm(Request $request){
+    // 	$min = $request->min;
+    // 	$max = $request->max;
+    // 	return view('tables.add_auto', ['min' => $min, 'max' => $max, 'code' => $request->code]);
+    // }
+	//
+    // public function insertAutoRestaurantTable(Request $request){
+    // 	$restaurant = Restaurant::where('code', $request->code)->first();
+	//
+    // 	for($i=0; $i<count($request->name); $i++){
+    // 		$restaurantTable = new RestaurantTable;
+    // 		$restaurantTable->name = $request->name[$i];
+    // 		$restaurantTable->capacity = $request->capacity[$i];
+    // 		$restaurantTable->restaurant_id = $restaurant->id;
+    // 		$restaurantTable->save();
+    // 	}
+	//
+    // 	flash('Table inserted')->success();
+	//
+    //     return redirect()->route('tables.show');
+    // }
 
     public function showEditTableForm(Request $request){
         $restaurantTable = RestaurantTable::find($request->id);
@@ -72,6 +73,11 @@ class RestaurantTableController extends Controller
         $restaurantTable->name = $request->name;
         $restaurantTable->capacity = $request->capacity;
         $restaurantTable->restaurant_type_id = $request->restaurant_type_id;
+
+		if($request->hasFile('photo')){
+            $restaurantTable->photo = $request->photo->store('uploads');
+        }
+
         $restaurantTable->save();
 
         flash('Table updated')->success();
